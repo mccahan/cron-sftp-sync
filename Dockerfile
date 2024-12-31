@@ -19,7 +19,7 @@ RUN echo '#!/bin/sh' > /app/sync.sh && \
     echo 'LOCAL_PATH=/app/local' >> /app/sync.sh && \
     echo 'while true; do' >> /app/sync.sh && \
     echo '  echo "Starting sync..."' >> /app/sync.sh && \
-    echo '  lftp -u "$USER","$PASS" -e "set xfer:use-temp-file yes; set xfer:temp-file-name *.lftp; mirror -v --continue --parallel=2 $REMOTE_PATH $LOCAL_PATH; bye" -p $PORT $PROTO://$SERVER' >> /app/sync.sh && \
+    echo '  TERM=dumb lftp -u "$USER","$PASS" -e "set cmd:interactive false; set log:enabled true; set xfer:use-temp-file yes; set log:enabled/xfer yes; set xfer:temp-file-name *.lftp; mirror --continue --parallel=2 $REMOTE_PATH $LOCAL_PATH; bye" -p $PORT $PROTO://$SERVER' >> /app/sync.sh && \
     echo '  sleep 600' >> /app/sync.sh && \
     echo '  echo "Completed. Sleeping for 10 minutes..."' >> /app/sync.sh && \
     echo 'done' >> /app/sync.sh && \

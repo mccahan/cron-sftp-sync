@@ -13,5 +13,5 @@ docker run -d --name sftp-sync-container \
   -e SFTP_PROTO=sftp \
   -e SFTP_PATH=/remote/directory \
   -v /mnt/synced-data:/app/local \
-  sftp-sync
+  mccahan/sftp-sync
 ```
